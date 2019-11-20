@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blog.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Blog.Core.AuthHelper.OverWrite.JwtHelper.IssueJwt(Blog.Core.AuthHelper.OverWrite.TokenModelJwt)">
+            <summary>
+            颁发JWT字符串
+            </summary>
+            <param name="tokenModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.AuthHelper.OverWrite.JwtHelper.SerializeJwt(System.String)">
+            <summary>
+            解析
+            </summary>
+            <param name="jwtStr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Blog.Core.AuthHelper.OverWrite.TokenModelJwt">
+            <summary>
+            令牌
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.OverWrite.TokenModelJwt.Uid">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.OverWrite.TokenModelJwt.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.OverWrite.TokenModelJwt.Work">
+            <summary>
+            职能
+            </summary>
+        </member>
+        <member name="T:Blog.Core.Controllers.WeatherForecastController">
+            <summary>
+            天气管理
+            </summary>
+        </member>
+        <member name="M:Blog.Core.Controllers.WeatherForecastController.Get">
+            <summary>
+            获取接口数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Controllers.WeatherForecastController.Post(Blog.Core.Model.love)">
+            <summary>
+            post
+            </summary>
+            <param name="love">model实体类参数</param>
+        </member>
+        <member name="T:Blog.Core.Extensions.SwaggerSetup">
+            <summary>
+            Swagger启动服务
+            </summary>
+        </member>
+        <member name="M:Blog.Core.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:Blog.Core.SwaggerHelper.CustomApiVersion">
+            <summary>
+            自定义Api版本
+            </summary>
+        </member>
+        <member name="T:Blog.Core.SwaggerHelper.CustomApiVersion.ApiVersions">
+            <summary>
+            Api接口版本 自定义
+            </summary>
+        </member>
+        <member name="F:Blog.Core.SwaggerHelper.CustomApiVersion.ApiVersions.V1">
+            <summary>
+            V1版本
+            </summary>
+        </member>
+        <member name="F:Blog.Core.SwaggerHelper.CustomApiVersion.ApiVersions.V2">
+            <summary>
+            V2版本
+            </summary>
+        </member>
+    </members>
+</doc>
