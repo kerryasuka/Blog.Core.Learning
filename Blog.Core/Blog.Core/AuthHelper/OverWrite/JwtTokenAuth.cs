@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Blog.Core.AuthHelper.OverWrite
@@ -20,12 +21,20 @@ namespace Blog.Core.AuthHelper.OverWrite
             _next = next;
         }
 
+        /// <summary>
+        /// 中间件前处理
+        /// </summary>
+        /// <param name="next"></param>
         private void PreProceed(HttpContext next)
         {
             //Console.WriteLine($"{DateTimeOffset.Now} middleware invoke prepoceed.");
             //...
         }
 
+        /// <summary>
+        /// 中间件后处理
+        /// </summary>
+        /// <param name="next"></param>
         private void PostProceed(HttpContext next)
         {
             //Console.WriteLine($"{DateTimeOffset.Now} middleware invoke postproceed.");
@@ -52,6 +61,14 @@ namespace Blog.Core.AuthHelper.OverWrite
                 {
                     //Console.WriteLine($"{DateTimeOffset.Now} token: {tokenHeader}.");
                     TokenModelJwt tm = JwtHelper.SerializeJwt(tokenHeader);
+
+                    //授权
+                    var claimList = new List<Claim>();
+                    var claim = new Claim(ClaimTypes.Role, tm.Role);
+                    claimList.Add(claim);
+                    var identity = new ClaimsIdentity(claimList);
+                    var principal = new ClaimsPrincipal(identity);
+                    httpContext.User = principal;
                 }
             }
             catch (Exception ex)
