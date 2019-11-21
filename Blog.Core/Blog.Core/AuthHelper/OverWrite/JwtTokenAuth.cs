@@ -9,7 +9,7 @@ namespace Blog.Core.AuthHelper.OverWrite
 {
     /// <summary>
     /// 中间件
-    /// 原作为自定义授权的中间件
+    /// 原作为自定义认证的中间件
     /// 现作为检查header token使用
     /// </summary>
     public class JwtTokenAuth

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Blog.Core.Common;
 using Blog.Core.Extensions;
+using Blog.Core.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -62,6 +63,11 @@ namespace Blog.Core
 
             app.UseRouting();
 
+            //自定义认证中间件可以尝试，但不推荐
+            //app.UseJwtTokenAuth();
+            //先开启认证中间件
+            app.UseAuthentication();
+            //再开启授权中间件
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

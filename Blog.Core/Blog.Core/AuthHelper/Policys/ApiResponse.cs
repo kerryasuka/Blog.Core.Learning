@@ -30,7 +30,7 @@ namespace Blog.Core.AuthHelper.Policys
     {
         Code401,
         Code403,
-        Code303,
+        Code404,
         Code500,
     }
 }

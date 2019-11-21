@@ -30,7 +30,7 @@ namespace Blog.Core.AuthHelper.OverWrite
                 /*
                  *特别重要：
                  * 1、这里将用户的部分信息，比如uid存到了Claim中，如果你想知道如何在其他地方将这个uid从Token中取出来，请看下边的SerializeJwt()方法，或者在整个解决方案，搜索这个方法，看哪里使用了！
-                 * 2、你也可以研究下HttpContext.User.Claims，具体的你可以看看Policys/PermissionHandler.cs类中是如何使用的。
+                 * 2、也可以研究下HttpContext.User.Claims，具体的可以看看Policys/PermissionHandler.cs类中是如何使用的。
                  */
                  new Claim(JwtRegisteredClaimNames.Jti, tokenModel.Uid.ToString()),
                  new Claim(JwtRegisteredClaimNames.Iat, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
