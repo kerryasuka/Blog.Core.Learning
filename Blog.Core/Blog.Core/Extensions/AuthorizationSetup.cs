@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace Blog.Core.Extensions
 {
     /*
-     *设置授权服务，必须三步走，授权 + 配置认证服务 + 开启授权中间件
+     *设置认证和授权服务，必须三步走，授权 + 配置认证服务 + 开启授权中间件
      *对于自定义的中间件的说明：其不能验证过期时间，故推荐使用官方中间件
      */
     /// <summary>
@@ -64,7 +64,7 @@ namespace Blog.Core.Extensions
             //[Authorize(Role = "Admin, System")]
 
             //1.2、基于策略的授权(简单版)
-            //这个和1.1、基于角色的API授权异曲同工，好处就是不用在controller中写多个roles
+            //和1.1、基于角色的API授权异曲同工，好处就是不用在controller中写多个roles
             //添加以下代码
             //然后在controller上面加上特性
             //[Authorize(Policy = "Admin")]

@@ -37,6 +37,8 @@ namespace Blog.Core
         {
             services.AddSwaggerSetup();
 
+            services.AddAuthorizationSetup();
+
             services.AddControllers();
         }
 

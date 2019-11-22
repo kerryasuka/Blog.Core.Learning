@@ -9,4 +9,12 @@
     <DocumentationFile>..\Blog.Core.Model\Blog.Core.Model.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.10" />
+  </ItemGroup>
+
 </Project>
