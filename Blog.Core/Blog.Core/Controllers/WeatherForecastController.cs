@@ -50,7 +50,7 @@ namespace Blog.Core.Controllers
         /// </summary>
         /// <param name="love">model实体类参数</param>
         [HttpPost]        
-        public void Post(love love)
+        public void Post(Love love)
         {
 
         }

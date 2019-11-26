@@ -5,8 +5,12 @@ namespace Blog.Core.Model
     /// <summary>
     /// 爱、死亡、机器人——蒂姆伯顿
     /// </summary>
-    public class love
-    {
+    public class Love
+    {        
+        public virtual string SayLove()
+        {
+            return "I ❤ You.";
+        }
         /// <summary>
         /// id
         /// </summary>
