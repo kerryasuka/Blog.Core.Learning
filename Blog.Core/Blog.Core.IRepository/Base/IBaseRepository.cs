@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -29,5 +30,14 @@ namespace Blog.Core.IRepository.Base
         Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, object>> orderByExpression, bool isAsc = true);
         Task<List<TEntity>> Query(string strWhere, string strOrderByFields);
         Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, int intTop, string strOrderByFields);
+        Task<List<TEntity>> Query(string strWhere, int intTop, string strOrderByFields);
+        Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, int intPageIndex, int intPageSize, string strOrderByFields);
+        Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFields);
+        Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> expression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFields = null);
+        Task<List<TResult>> QueryMuch<T1, T2, T3, TResult>(
+            Expression<Func<T1, T2, T3, object[]>> joinExpression,
+            Expression<Func<T1, T2, T3, TResult>> selectExpression,
+            Expression<Func<T1, T2, T3, bool>> whereLambda = null
+            ) where T3 : class, new();
     }
 }
