@@ -147,23 +147,6 @@
             签名认证
             </summary>
         </member>
-        <member name="T:Blog.Core.Controllers.WeatherForecastController">
-            <summary>
-            天气管理
-            </summary>
-        </member>
-        <member name="M:Blog.Core.Controllers.WeatherForecastController.Get">
-            <summary>
-            获取接口数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Blog.Core.Controllers.WeatherForecastController.Post(Blog.Core.Model.Love)">
-            <summary>
-            post
-            </summary>
-            <param name="love">model实体类参数</param>
-        </member>
         <member name="T:Blog.Core.Extensions.AuthorizationSetup">
             <summary>
             启动授权服务 
