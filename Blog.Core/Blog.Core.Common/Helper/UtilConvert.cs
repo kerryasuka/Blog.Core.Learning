@@ -40,7 +40,7 @@ namespace Blog.Core.Common.Helper
             return errorValue;
         }
         /// <summary>
-        /// 
+        /// object转换为double
         /// </summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
@@ -54,7 +54,7 @@ namespace Blog.Core.Common.Helper
             return 0;
         }
         /// <summary>
-        /// 
+        /// object转换为double
         /// </summary>
         /// <param name="thisValue"></param>
         /// <param name="errorValue"></param>
@@ -90,7 +90,7 @@ namespace Blog.Core.Common.Helper
             return errorValue;
         }
         /// <summary>
-        /// 
+        /// object转换为Decimal
         /// </summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
@@ -104,7 +104,7 @@ namespace Blog.Core.Common.Helper
             return 0;
         }
         /// <summary>
-        /// 
+        /// object转换为Decimal
         /// </summary>
         /// <param name="thisValue"></param>
         /// <param name="errorValue"></param>
@@ -119,7 +119,7 @@ namespace Blog.Core.Common.Helper
             return errorValue;
         }
         /// <summary>
-        /// 
+        /// object转换为DateTime
         /// </summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
@@ -133,7 +133,7 @@ namespace Blog.Core.Common.Helper
             return reval;
         }
         /// <summary>
-        /// 
+        /// object转换为DateTime
         /// </summary>
         /// <param name="thisValue"></param>
         /// <param name="errorValue"></param>
@@ -148,7 +148,7 @@ namespace Blog.Core.Common.Helper
             return errorValue;
         }
         /// <summary>
-        /// 
+        /// object转换为bool
         /// </summary>
         /// <param name="thisValue"></param>
         /// <returns></returns>
