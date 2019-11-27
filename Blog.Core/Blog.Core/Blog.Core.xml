@@ -38,6 +38,115 @@
             职能
             </summary>
         </member>
+        <member name="T:Blog.Core.AuthHelper.OverWrite.JwtTokenAuth">
+            <summary>
+            中间件
+            原作为自定义认证的中间件
+            现作为检查header token使用
+            </summary>
+        </member>
+        <member name="M:Blog.Core.AuthHelper.OverWrite.JwtTokenAuth.PreProceed(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            中间件前处理
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Blog.Core.AuthHelper.OverWrite.JwtTokenAuth.PostProceed(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            中间件后处理
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="T:Blog.Core.AuthHelper.Policys.PermissionHandler">
+            <summary>
+            权限授权处理器
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionHandler.Scheme">
+            <summary>
+            验证方案提供对象
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionHandler.RoleModulePermissionServices">
+            <summary>
+            services层注入
+            </summary>
+        </member>
+        <member name="T:Blog.Core.AuthHelper.Policys.PermissionItem">
+            <summary>
+            用户或角色或其他凭据实体，就像订单详情一样
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionItem.Role">
+            <summary>
+            用户或角色或其他凭据
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionItem.Url">
+            <summary>
+            请求Url
+            </summary>
+        </member>
+        <member name="T:Blog.Core.AuthHelper.Policys.PermissionRequirement">
+            <summary>
+            必要参数类，类似一个订单信息
+            继承IAuthorizationRequirement，用于设计自定义权限处理器PermissionHandler
+            因为AuthorizationHandler中的泛型参数TRequirement必须继承IAuthorizationRequirement
+            </summary>
+        </member>
+        <member name="M:Blog.Core.AuthHelper.Policys.PermissionRequirement.#ctor(System.String,System.Collections.Generic.List{Blog.Core.AuthHelper.Policys.PermissionItem},System.String,System.String,System.String,Microsoft.IdentityModel.Tokens.SigningCredentials,System.TimeSpan)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="deniedAction">拒绝请求的Url</param>
+            <param name="permissions">权限集合</param>
+            <param name="cliamType">声明类型</param>
+            <param name="issuer">发行人</param>
+            <param name="audience">订阅人</param>
+            <param name="signingCredentials">签名验证实体</param>
+            <param name="expiration">过期时间</param>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.Permissions">
+            <summary>
+            用户权限集合，一个订单包含了很多详情
+            同理，一个网站的认证发行中，也有很多权限详情(这里是Role和Url的关系)
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.DeniedAction">
+            <summary>
+            无权限Action
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.ClaimType">
+            <summary>
+            认证授权类型
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.LoginPath">
+            <summary>
+            请求路径
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.Issuer">
+            <summary>
+            发行人
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.Audience">
+            <summary>
+            订阅人
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.Expiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionRequirement.SigningCredentials">
+            <summary>
+            签名认证
+            </summary>
+        </member>
         <member name="T:Blog.Core.Controllers.WeatherForecastController">
             <summary>
             天气管理
@@ -49,11 +158,31 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Blog.Core.Controllers.WeatherForecastController.Post(Blog.Core.Model.love)">
+        <member name="M:Blog.Core.Controllers.WeatherForecastController.Post(Blog.Core.Model.Love)">
             <summary>
             post
             </summary>
             <param name="love">model实体类参数</param>
+        </member>
+        <member name="T:Blog.Core.Extensions.AuthorizationSetup">
+            <summary>
+            启动授权服务 
+            </summary>
+        </member>
+        <member name="M:Blog.Core.Extensions.AuthorizationSetup.Authorize(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.IdentityModel.Tokens.SymmetricSecurityKey,Blog.Core.AuthHelper.Policys.PermissionRequirement)">
+            <summary>
+            认证和注入
+            </summary>
+            <param name="services"></param>
+            <param name="signingKey"></param>
+            <param name="permissionRequirement"></param>
+        </member>
+        <member name="M:Blog.Core.Extensions.AuthorizationSetup.GetParameters(Microsoft.IdentityModel.Tokens.SymmetricSecurityKey)">
+            <summary>
+            读取配置文件获取参数
+            </summary>
+            <param name="signingKey"></param>
+            <returns></returns>
         </member>
         <member name="T:Blog.Core.Extensions.SwaggerSetup">
             <summary>
