@@ -32,7 +32,7 @@ namespace Blog.Core.Model.ViewModels
         /// <summary>
         /// 上一篇Id
         /// </summary>
-        public string PreviousId { get; set; }
+        public int PreviousId { get; set; }
         /// <summary>
         /// 下一篇
         /// </summary>
@@ -40,7 +40,7 @@ namespace Blog.Core.Model.ViewModels
         /// <summary>
         /// 下一篇Id
         /// </summary>
-        public string NextId { get; set; }
+        public int NextId { get; set; }
         /// <summary>
         /// 类别
         /// </summary>

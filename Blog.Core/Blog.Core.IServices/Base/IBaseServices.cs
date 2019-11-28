@@ -39,6 +39,6 @@ namespace Blog.Core.IServices.Base
             Expression<Func<T1, T2, T3, object[]>> joinExpression,
             Expression<Func<T1, T2, T3, TResult>> selectExpression,
             Expression<Func<T1, T2, T3, bool>> whereLambda = null
-            ) where T3 : class, new();
+            ) where T1 : class, new();
     }
 }
