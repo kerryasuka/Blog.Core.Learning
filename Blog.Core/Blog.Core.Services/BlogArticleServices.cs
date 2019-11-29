@@ -14,14 +14,14 @@ namespace Blog.Core.Services
 {
     public class BlogArticleServices : BaseServices<BlogArticle>, IBlogArticleServices
     {
-        IBlogArticleRepository m_dal;
-        IMapper m_mapper;
+        IBlogArticleRepository m_Dal;
+        IMapper m_Mapper;
 
         public BlogArticleServices(IBlogArticleRepository dal, IMapper mapper)
         {
-            this.m_dal = dal;
+            this.m_Dal = dal;
             base.baseDal = dal;
-            this.m_mapper = mapper;
+            this.m_Mapper = mapper;
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Blog.Core.Services
                         prevBlog = blogIndex > 0 ? blogList[blogIndex - 1] : null;
                         nextBlog = blogIndex + 1 < blogList.Count() ? blogList[blogIndex + 1] : null;
 
-                        models = m_mapper.Map<BlogViewModels>(blogArticle);
+                        models = m_Mapper.Map<BlogViewModels>(blogArticle);
 
                         if(nextBlog != null)
                         {
@@ -63,7 +63,7 @@ namespace Blog.Core.Services
                             models.PreviousId = prevBlog.BId;
                         }
 
-                        var entity2ViewModel = m_mapper.Map<BlogArticle>(models);
+                        var entity2ViewModel = m_Mapper.Map<BlogArticle>(models);
                     }
                     catch (Exception ex)
                     {

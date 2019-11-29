@@ -5,25 +5,23 @@ using Blog.Core.Services.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Blog.Core.Services
 {
-    public class AdvertisementServices : BaseServices<Advertisement>, IAdvertisementServices
+    public class TopicServices: BaseServices<Topic>, ITopicServices
     {
-        IAdvertisementRepository m_Dal;
+        ITopicRepository m_Dal;
 
-        public AdvertisementServices(IAdvertisementRepository dal)
+        public TopicServices(ITopicRepository dal)
         {
             this.m_Dal = dal;
             base.baseDal = dal;
         }
 
-        public void ReturnExp()
+        public async Task<List<Topic>> GetTopics()
         {
-            int a = 1;
-            int b = 0;
-
-            int c = a / b;
+            return await base.Query(a => !a.TIsDelete && a.TSectendDetail == "tbug");
         }
     }
 }
