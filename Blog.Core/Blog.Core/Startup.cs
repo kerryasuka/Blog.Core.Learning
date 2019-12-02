@@ -21,13 +21,17 @@ namespace Blog.Core
 {
     public class Startup
     {
+        public IWebHostEnvironment Env { get; }
+
         /// <summary>
         /// ¹¹Ôìº¯Êý
         /// </summary>
         /// <param name="configuration"></param>
-        public Startup(IConfiguration configuration)
+        /// <param name="env"></param>
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            this.Env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +39,8 @@ namespace Blog.Core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(new AppSettings(Env.ContentRootPath));
+
             services.AddSwaggerSetup();
 
             services.AddAuthorizationSetup();

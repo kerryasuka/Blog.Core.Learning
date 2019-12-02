@@ -15,7 +15,7 @@ namespace Blog.Core.Common
 
         public AppSettings(string contentPath)
         {
-            string Path = "appsetting.json";
+            string Path = "appsettings.json";
 
             //如果你的配置文件是根据环境变量来分开了，可以这样写
             //Path = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";

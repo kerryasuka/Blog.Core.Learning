@@ -17,7 +17,7 @@ namespace Blog.Core.Extensions
 {
     /*
      *设置认证和授权服务，必须三步走，授权 + 配置认证服务 + 开启授权中间件
-     *对于自定义的中间件的说明：其不能验证过期时间，故推荐使用官方中间件
+     *对于自定义的中间件的说明：其不能验证过期时间，故推荐使用官方认证和授权中间件
      */
     /// <summary>
     /// 启动授权服务 
@@ -33,11 +33,12 @@ namespace Blog.Core.Extensions
             var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
             var signingKey = new SymmetricSecurityKey(keyByteArray);
 
-            AddAuthenticationByDb(services, signingKey);
+            //AddAuthenticationByDb(services, signingKey);
+            AddAuthorizationByCode(services, signingKey);
         }
 
         /*
-        *如果不想使用数据库，仅仅想在代码里配置授权，可以按照一下步骤进行：
+        *如果不想使用数据库，仅仅想在代码里配置授权，可以按照以下步骤进行：
         * 1、授权
         * 1.1、基于角色的API授权
         * 在指定的接口上，配置特性即可，比如：[Authorize(Role = "Admin, System, Others")]

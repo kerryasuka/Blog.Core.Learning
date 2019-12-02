@@ -26,7 +26,7 @@ namespace Blog.Core.AuthHelper.Policys
         {
             this.Permissions = permissions;
             this.DeniedAction = deniedAction;
-            this.ClaimType = ClaimType;
+            this.ClaimType = cliamType;
             this.Issuer = issuer;
             this.Audience = audience;
             this.Expiration = expiration;
