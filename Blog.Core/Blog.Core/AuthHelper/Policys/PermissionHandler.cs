@@ -147,7 +147,7 @@ namespace Blog.Core.AuthHelper.Policys
                     }
                 }
                 //判断没有登陆时，是否访问登陆的url，并且是Post请求，form表单提交类型，否则为失败
-                if(!requestUrl.Equals(requirement.LoginPath.ToLower(), StringComparison.Ordinal) && （!httpContext.Request.Method.Equals("POST") || !httpContext.Request.HasFormContentType))
+                if(!requestUrl.Equals(requirement.LoginPath.ToLower(), StringComparison.Ordinal) && (!httpContext.Request.Method.Equals("POST") || !httpContext.Request.HasFormContentType))
                 {
                     context.Fail();
                     return;
