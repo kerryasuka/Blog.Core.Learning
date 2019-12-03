@@ -133,6 +133,7 @@ namespace Blog.Core.AuthHelper.Policys
                                 return;
                             }
                         }
+
                         //判断过期时间(这里仅仅是最坏验证原则，你可以不要这个if else的判断，因为我们使用的官方验证，Token过期后上边的result?.Principal就为null了，讲不到这里，因此这里其实可以不用验证过期时间，只是做最后研究判断)
                         if ((httpContext.User.Claims.SingleOrDefault(s => s.Type == ClaimTypes.Expiration)?.Value) != null && DateTime.Parse(httpContext.User.Claims.SingleOrDefault(s => s.Type == ClaimTypes.Expiration)?.Value) >= DateTime.Now)
                         {
@@ -146,6 +147,7 @@ namespace Blog.Core.AuthHelper.Policys
                         return;
                     }
                 }
+
                 //判断没有登陆时，是否访问登陆的url，并且是Post请求，form表单提交类型，否则为失败
                 if(!requestUrl.Equals(requirement.LoginPath.ToLower(), StringComparison.Ordinal) && (!httpContext.Request.Method.Equals("POST") || !httpContext.Request.HasFormContentType))
                 {

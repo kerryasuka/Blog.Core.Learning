@@ -62,7 +62,7 @@
             权限授权处理器
             </summary>
         </member>
-        <member name="P:Blog.Core.AuthHelper.Policys.PermissionHandler.Scheme">
+        <member name="P:Blog.Core.AuthHelper.Policys.PermissionHandler.AuthenticationSchemeProvider">
             <summary>
             验证方案提供对象
             </summary>
@@ -71,6 +71,22 @@
             <summary>
             services层注入
             </summary>
+        </member>
+        <member name="M:Blog.Core.AuthHelper.Policys.PermissionHandler.#ctor(Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider,Blog.Core.IServices.IRoleModulePermissionServices,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            构造函数注入
+            </summary>
+            <param name="authenticationSchemeProvider"></param>
+            <param name="roleModulePermissionServices"></param>
+            <param name="accessor"></param>
+        </member>
+        <member name="M:Blog.Core.AuthHelper.Policys.PermissionHandler.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Blog.Core.AuthHelper.Policys.PermissionRequirement)">
+            <summary>
+            异步需求处理
+            </summary>
+            <param name="context"></param>
+            <param name="requirement"></param>
+            <returns></returns>
         </member>
         <member name="T:Blog.Core.AuthHelper.Policys.PermissionItem">
             <summary>

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MiniProfiler.Shared" Version="4.1.0" />
+    <PackageReference Include="sqlSugarCore" Version="5.0.0.10" />
   </ItemGroup>
 
   <ItemGroup>
