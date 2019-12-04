@@ -9,16 +9,16 @@ namespace Blog.Core.Common.DB
     public class BaseDbConfig
     {
         private static string sqliteConnection = AppSettings.App(new string[] { "AppSettings", "Sqlite", "SqliteConnection" });
-        private static bool isSqliteEnable = AppSettings.App(new string[] { "AppSettings", "Sqlite", "Enabled" }).ObjToBool();
+        private static bool isSqliteEnable = AppSettings.App(new string[] { "AppSettings", "Sqlite", "Enabled" }).ObjToBoolean();
 
         private static string sqlServerConnection = AppSettings.App(new string[] { "AppSettings", "SqlServer", "SqlServerConnection" });
-        private static bool isSqlServerEnable = AppSettings.App(new string[] { "AppSettings", "SqlServer", "Enabled" }).ObjToBool();
+        private static bool isSqlServerEnable = AppSettings.App(new string[] { "AppSettings", "SqlServer", "Enabled" }).ObjToBoolean();
 
         private static string mySqlConnection = AppSettings.App(new string[] { "AppSettings", "MySql", "MySqlConnection" });
-        private static bool isMySqlEnable = AppSettings.App(new string[] { "AppSettings", "MySql", "Enabled" }).ObjToBool();
+        private static bool isMySqlEnable = AppSettings.App(new string[] { "AppSettings", "MySql", "Enabled" }).ObjToBoolean();
 
         private static string oracleConnection = AppSettings.App(new string[] { "AppSettings", "Oracle", "OracleConnection" });
-        private static bool isOracleEnable = AppSettings.App(new string[] { "AppSettings", "Oracle", "Enabled" }).ObjToBool();
+        private static bool isOracleEnable = AppSettings.App(new string[] { "AppSettings", "Oracle", "Enabled" }).ObjToBoolean();
 
         public static string ConnectionString => InitConn();
         public static DataBaseType DbType = DataBaseType.SqlServer;

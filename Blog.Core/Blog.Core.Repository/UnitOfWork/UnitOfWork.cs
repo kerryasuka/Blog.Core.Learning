@@ -1,6 +1,7 @@
 ﻿using Blog.Core.Common;
 using Blog.Core.Common.Helper;
 using Blog.Core.IRepository.UnitOfWork;
+using SqlSugar;
 using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,11 @@ namespace Blog.Core.Repository.UnitOfWork
         {
             _sqlSugarClient = sqlSugarClient;
 
-            if (AppSettings.App(new string[] { "AppSetting", "SqlAOP", "Enable" }).ObjToBool())
+            if (AppSettings.App(new string[] { "AppSetting", "SqlAOP", "Enable" }).ObjToBoolean())
             {
                 sqlSugarClient.Aop.OnLogExecuting = (sql, pars) =>
                 {
-                    Parallel.ForEach(0, 1, e =>
+                    Parallel.For(0, 1, e =>
                     {
                         MiniProfiler.Current.CustomTiming("SQL: ", GetParas(pars) + "【SQL语句】: " + sql);
                         LogLock.OutSql2Log("SqlLog", new string[] { GetParas(pars), "【SQL语句】: " + sql });

@@ -5,6 +5,7 @@ using Blog.Core.Repository.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Blog.Core.Repository
 {
@@ -12,6 +13,16 @@ namespace Blog.Core.Repository
     {
         public RoleModulePermissionRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
+        }
+
+        public Task<List<TestMuchTableResult>> QueryMuchTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<RoleModulePermission>> WithChildrenModel()
+        {
+            throw new NotImplementedException();
         }
     }
 }
