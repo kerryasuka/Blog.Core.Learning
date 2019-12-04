@@ -96,7 +96,7 @@ namespace Blog.Core.Repository.Base
         /// <param name="listEntity">实体集合</param>
         /// <returns>影响行数</returns>
         public async Task<int> Add(List<TEntity> listEntity)
-        {            
+        {
             return await m_db.Insertable(listEntity.ToArray()).ExecuteCommandAsync();
         }
 
@@ -112,29 +112,271 @@ namespace Blog.Core.Repository.Base
             return await m_db.Deleteable<TEntity>(id).ExecuteCommandHasChangeAsync();
         }
 
-        public async Task<bool> Delete(TEntity model);
-        public async Task<bool> DeleteByIds(object[] lstIds);
+        /// <summary>
+        /// 删除指定实体数据
+        /// </summary>
+        /// <param name="model">博文实体类</param>
+        /// <returns></returns>
+        public async Task<bool> Delete(TEntity entity)
+        {
+            //var i = await Task.Run(() => m_db.Deleteable(entity).ExecuteCommand());
+            //return i > 0;
 
-        public async Task<bool> Update(TEntity model);
-        public async Task<bool> Update(TEntity entity, string strWhere);
-        public async Task<bool> Update(object operateAnonymousObjects);
-        public async Task<bool> Update(TEntity entity, List<string> lstColumns = null, List<string> lstIgnoreColumns = null, string strWhere = "");
+            return await m_db.Deleteable(entity).ExecuteCommandHasChangeAsync();
+        }
 
-        public async Task<List<TEntity>> Query();
-        public async Task<List<TEntity>> Query(string strWhere);
-        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression);
-        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, string strOrderByFields);
-        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, object>> orderByExpression, bool isAsc = true);
-        public async Task<List<TEntity>> Query(string strWhere, string strOrderByFields);
-        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, int intTop, string strOrderByFields);
-        public async Task<List<TEntity>> Query(string strWhere, int intTop, string strOrderByFields);
-        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, int intPageIndex, int intPageSize, string strOrderByFields);
-        public async Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFields);
-        public async Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> expression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFields = null);
+        /// <summary>
+        /// 批量删除指定Id集合的数据
+        /// </summary>
+        /// <param name="lstIds">主键Id集合</param>
+        /// <returns></returns>
+        public async Task<bool> DeleteByIds(object[] lstIds)
+        {
+            //var i = await Task.Run(() => m_db.Deleteable<TEntity>().In(lstIds).ExecuteCommand());
+            //return i > 0;
+
+            return await m_db.Deleteable<TEntity>().In(lstIds).ExecuteCommandHasChangeAsync();
+        }
+
+        /// <summary>
+        /// 更新实体数据
+        /// </summary>
+        /// <param name="entity">博文实体类</param>
+        /// <returns></returns>
+        public async Task<bool> Update(TEntity entity)
+        {
+            //var i = await Task.Run(() => m_db.Updateable(entity).ExecuteCommand());
+            //return i > 0;
+
+            return await m_db.Updateable(entity).ExecuteCommandHasChangeAsync();
+        }
+
+        public async Task<bool> Update(TEntity entity, string strWhere)
+        {
+            //return await Task.Run(() => m_db.Updateable(entity).Where(strWhere).ExecuteCommand() > 0);
+            return await m_db.Updateable(entity).Where(strWhere).ExecuteCommandHasChangeAsync();
+        }
+
+        public async Task<bool> Update(string strSql, SugarParameter[] parameters = null)
+        {
+            //return await Task.Run(() => m_db.Ado.ExecuteCommand(strSql, parameters) > 0);
+            return await m_db.Ado.ExecuteCommandAsync(strSql, parameters) > 0;
+        }
+
+        public async Task<bool> Update(object operateAnonymousObjects)
+        {
+            return await m_db.Updateable<TEntity>(operateAnonymousObjects).ExecuteCommandAsync() > 0;
+        }
+
+        /// <summary>
+        /// 更新某些列
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <param name="lstColumns">列集合</param>
+        /// <param name="lstIgnoreColumns">忽略的列集合</param>
+        /// <param name="strWhere">筛选条件</param>
+        /// <returns></returns>
+        public async Task<bool> Update(TEntity entity, List<string> lstColumns = null, List<string> lstIgnoreColumns = null, string strWhere = "")
+        {
+            //IUpdateable<TEntity> up = await Task.Run(() => m_db.Updateable(entity));
+            //if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
+            //{
+            //    up = await Task.Run(() => up.IgnoreColumns(it => lstIgnoreColumns.Contains(it)));
+            //}
+            //if (lstColumns != null && lstColumns.Count > 0)
+            //{
+            //    up = await Task.Run(() => up.UpdateColumns(it => lstColumns.Contains(it)));
+            //}
+            //if (!string.IsNullOrEmpty(strWhere))
+            //{
+            //    up = await Task.Run(() => up.Where(strWhere));
+            //}
+            //return await Task.Run(() => up.ExecuteCommand()) > 0;
+
+            IUpdateable<TEntity> up = m_db.Updateable(entity);
+            if (lstIgnoreColumns != null && lstIgnoreColumns.Count > 0)
+            {
+                up = up.IgnoreColumns(lstIgnoreColumns.ToArray());
+            }
+            if (lstColumns != null && lstColumns.Count > 0)
+            {
+                up = up.UpdateColumns(lstColumns.ToArray());
+            }
+            if (!string.IsNullOrEmpty(strWhere))
+            {
+                up = up.Where(strWhere);
+            }
+            return await up.ExecuteCommandHasChangeAsync();
+        }
+
+        /// <summary>
+        /// 查询所有数据
+        /// </summary>
+        /// <returns>数据列表</returns>
+        public async Task<List<TEntity>> Query()
+        {
+            return await m_db.Queryable<TEntity>().ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询数据列表
+        /// </summary>
+        /// <param name="strWhere">数据列表</param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> Query(string strWhere)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToList());
+            return await m_db.Queryable<TEntity>().WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询数据列表
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns>数据列表</returns>
+        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression)
+        {
+            return await m_db.Queryable<TEntity>().WhereIF(expression != null, expression).ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询一个列表
+        /// </summary>
+        /// <param name="expression">条件表达式</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns>数据列表</returns>
+        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, string strOrderByFields)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(expression!= null, expression).ToList());
+
+            return await m_db.Queryable<TEntity>().WhereIF(expression != null, expression).OrderByIF(strOrderByFields != null, strOrderByFields).ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询一个列表
+        /// </summary>
+        /// <param name="expression">条件表达式</param>
+        /// <param name="orderByExpression">排序字段，如name asc，age desc</param>
+        /// <param name="isAsc"></param>
+        /// <returns>数据列表</returns>
+        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, Expression<Func<TEntity, object>> orderByExpression, bool isAsc = true)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(orderByExpression != null, orderByExpression, isAsc ? OrderByType.Asc : OrderByType.Desc).WhereIF(expression != null, expression).ToList());
+            return await m_db.Queryable<TEntity>().OrderByIF(orderByExpression != null, orderByExpression, isAsc ? OrderByType.Asc : OrderByType.Desc).WhereIF(expression != null, expression).ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询一个列表
+        /// </summary>
+        /// <param name="strWhere">条件表达式</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> Query(string strWhere, string strOrderByFields)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToList());
+            return await m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询前N条数据
+        /// </summary>
+        /// <param name="expression">条件表达式</param>
+        /// <param name="intTop">取出条数</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, int intTop, string strOrderByFields)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(expression != null, expression).Take(intTop).ToList());
+            return await m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(expression != null, expression).Take(intTop).ToListAsync();
+        }
+
+        /// <summary>
+        /// 查询前N条数据
+        /// </summary>
+        /// <param name="strWhere">条件表达式</param>
+        /// <param name="intTop">取出条数</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> Query(string strWhere, int intTop, string strOrderByFields)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToList());
+            return await m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToListAsync();
+        }
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="expression">条件表达式</param>
+        /// <param name="intPageIndex">页码</param>
+        /// <param name="intPageSize">单页容量</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> Query(Expression<Func<TEntity, bool>> expression, int intPageIndex, int intPageSize, string strOrderByFields)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(expression != null, expression).ToPageList(intPageIndex, intPageSize));
+            return await m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(expression != null, expression).ToPageListAsync(intPageIndex, intPageSize);
+        }
+
+        /// <summary>
+        /// 分页查询
+        /// </summary>
+        /// <param name="strWhere">条件表达式</param>
+        /// <param name="intPageIndex">页码</param>
+        /// <param name="intPageSize">单页容量</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> Query(string strWhere, int intPageIndex, int intPageSize, string strOrderByFields)
+        {
+            //return await Task.Run(() => m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToPageList(intPageIndex, intPageSize));
+            return await m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(!string.IsNullOrEmpty(strWhere), strWhere).ToPageListAsync(intPageIndex, intPageSize);
+        }
+
+        /// <summary>
+        /// 分页查询，当前使用版本
+        /// </summary>
+        /// <param name="expression">条件表达式</param>
+        /// <param name="intPageIndex">页码</param>
+        /// <param name="intPageSize">单页容量</param>
+        /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
+        /// <returns></returns>
+        public async Task<PageModel<TEntity>> QueryPage(Expression<Func<TEntity, bool>> expression, int intPageIndex = 1, int intPageSize = 20, string strOrderByFields = null)
+        {
+            RefAsync<int> totalCount = 0;
+            var list = await m_db.Queryable<TEntity>().OrderByIF(!string.IsNullOrEmpty(strOrderByFields), strOrderByFields).WhereIF(expression != null, expression).ToPageListAsync(intPageIndex, intPageSize);
+
+            int pageCount = (Math.Ceiling(totalCount.ObjToDecimal() / intPageSize.ObjToDecimal())).ObjToInt();
+            return new PageModel<TEntity>()
+            {
+                DataCount = totalCount,
+                PageCount = pageCount,
+                Page = intPageIndex,
+                PageSize = intPageSize,
+                Data = list,
+            };
+        }
+
+        /// <summary>
+        /// 多表查询
+        /// </summary>
+        /// <typeparam name="T1">实体1</typeparam>
+        /// <typeparam name="T2">实体2</typeparam>
+        /// <typeparam name="T3">实体3</typeparam>
+        /// <typeparam name="TResult">返回对象</typeparam>
+        /// <param name="joinExpression">关联表达式 (join1, join2) => new object[] { JoinType.Left, join1.UserNo == join2.UserNo } </param>
+        /// <param name="selectExpression">返回表达式 (s1, s2) => new { Id1 = s1.UserNo, Id2 = s2.UserNo } </param>
+        /// <param name="whereLambda">查询表达式 (w1, w2) => w1.UserNo == "" </param>
+        /// <returns></returns>
         public async Task<List<TResult>> QueryMuch<T1, T2, T3, TResult>(
             Expression<Func<T1, T2, T3, object[]>> joinExpression,
             Expression<Func<T1, T2, T3, TResult>> selectExpression,
             Expression<Func<T1, T2, T3, bool>> whereLambda = null
-            ) where T3 : class, new();
+            ) where T1 : class, new()
+        {
+            if (whereLambda == null)
+            {
+                return await m_db.Queryable(joinExpression).Select(selectExpression).ToListAsync();
+            }
+            return await m_db.Queryable(joinExpression).Where(whereLambda).Select(selectExpression).ToListAsync();
+        }
     }
 }

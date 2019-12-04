@@ -184,7 +184,7 @@ namespace Blog.Core.Services.Base
         /// 查询前N条数据
         /// </summary>
         /// <param name="strWhere">条件</param>
-        /// <param name="intTop">去除条数</param>
+        /// <param name="intTop">取出条数</param>
         /// <param name="strOrderByFields">排序字段，如name asc，age desc</param>
         /// <returns>数据列表</returns>
         public async Task<List<TEntity>> Query(string strWhere, int intTop, string strOrderByFields)
