@@ -814,6 +814,31 @@
             服务器错误
             </summary>
         </member>
+        <member name="P:Blog.Core.Model.Seed.MyContext.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Seed.MyContext.DbType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Seed.MyContext.Db">
+            <summary>
+            数据连接对象
+            </summary>
+        </member>
+        <member name="P:Blog.Core.Model.Seed.MyContext.Context">
+            <summary>
+            数据库上下文实例(自动关闭连接)
+            </summary>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="T:Blog.Core.Model.TableModel`1">
             <summary>
             表格数据，支持分页

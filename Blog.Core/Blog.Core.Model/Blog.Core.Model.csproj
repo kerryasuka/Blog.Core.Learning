@@ -13,4 +13,8 @@
     <PackageReference Include="sqlSugarCore" Version="5.0.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Core.Common\Blog.Core.Common.csproj" />
+  </ItemGroup>
+
 </Project>
