@@ -814,6 +814,48 @@
             服务器错误
             </summary>
         </member>
+        <member name="M:Blog.Core.Model.Seed.DbSeed.SeedAsync(Blog.Core.Model.Seed.MyContext)">
+            <summary>
+            异步添加种子数据
+            </summary>
+            <param name="myContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.FrameSeed.CreateModels(Blog.Core.Model.Seed.MyContext)">
+            <summary>
+            生成Model层
+            </summary>
+            <param name="myContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.FrameSeed.CreateIRepository(Blog.Core.Model.Seed.MyContext)">
+            <summary>
+            生成IRepository层
+            </summary>
+            <param name="myContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.FrameSeed.CreateIServices(Blog.Core.Model.Seed.MyContext)">
+            <summary>
+            生成IServices层
+            </summary>
+            <param name="myContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.FrameSeed.CreateRepository(Blog.Core.Model.Seed.MyContext)">
+            <summary>
+            生成Repository层
+            </summary>
+            <param name="myContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.FrameSeed.CreateServices(Blog.Core.Model.Seed.MyContext)">
+            <summary>
+            生成Services层
+            </summary>
+            <param name="myContext"></param>
+            <returns></returns>
+        </member>
         <member name="P:Blog.Core.Model.Seed.MyContext.ConnectionString">
             <summary>
             连接字符串
@@ -838,6 +880,126 @@
             <summary>
             构造函数
             </summary>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateModelByDbTable(System.String,System.String,System.String[],System.String,System.Boolean)">
+            <summary>
+            根据数据库表产生Model层
+            </summary>
+            <param name="strPath">实体类存放路径</param>
+            <param name="strNameSpace">命名空间</param>
+            <param name="lstTableNames">产生指定的表名称</param>
+            <param name="strInterFace">实现接口</param>
+            <param name="blnSerializable">是否序列化</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateIRepositoryByDbTable(System.String,System.String,System.String[],System.String)">
+            <summary>
+            根据数据库表产生IRepository层
+            </summary>
+            <param name="strPath">实体类存放路径</param>
+            <param name="strNameSpace">命名空间</param>
+            <param name="lstTableNames">产生指定的表名称</param>
+            <param name="strInterface">实现接口</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateIServicesByDbTable(System.String,System.String,System.String[],System.String)">
+            <summary>
+            根据数据库表产生IServices层
+            </summary>
+            <param name="strPath">实体类存放路径</param>
+            <param name="strNameSpace">命名空间</param>
+            <param name="lstTableNames">产生指定的表名称</param>
+            <param name="strInterface">实现接口</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateRepositoryByDbTable(System.String,System.String,System.String[],System.String)">
+            <summary>
+            根据数据库表产生Repository层
+            </summary>
+            <param name="strPath">实体类存放路径</param>
+            <param name="strNameSpace">命名空间</param>
+            <param name="lstTableNames">产生指定的表名称</param>
+            <param name="strInterface">实现接口</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateServicesByDbTable(System.String,System.String,System.String[],System.String)">
+            <summary>
+            根据数据库表产生Services层
+            </summary>
+            <param name="strPath">实体类存放路径</param>
+            <param name="strNameSpace">命名空间</param>
+            <param name="lstTableNames">产生指定的表名称</param>
+            <param name="strInterface">实现接口</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetEntityDb``1">
+            <summary>
+            获取数据库处理对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetEntityDb``1(SqlSugar.SqlSugarClient)">
+            <summary>
+            获取数据库处理对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="db"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateTableByEntity``1(System.Boolean,``0[])">
+            <summary>
+            根据实体生成数据库表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="blnBackupTable">是否备份表</param>
+            <param name="lstEntitys">指定的实体</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.CreateTableByEntity(System.Boolean,System.Type[])">
+            <summary>
+            根据实体类生成数据库表
+            </summary>
+            <param name="blnBackupTable">是否备份表</param>
+            <param name="lstEntitys">指定的实体</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetDbContext">
+            <summary>
+            活得一个DbContext
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.Init(System.String,SqlSugar.DbType)">
+            <summary>
+            设置初始化参数
+            </summary>
+            <param name="strConnectionString">连接字符串</param>
+            <param name="enumDbType">数据库类型</param>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetConnectionConfig(System.Boolean,System.Boolean)">
+            <summary>
+            创建一个链接配置
+            </summary>
+            <param name="blnIsAutoCloseConnection">是否自动关闭链接</param>
+            <param name="blnIsSharedSameThread">是否跨类事务</param>
+            <returns>ConnectionConfig</returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetCustomDb(SqlSugar.ConnectionConfig)">
+            <summary>
+            获取一个自定义的Db
+            </summary>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetCustomEntityDb``1(SqlSugar.SqlSugarClient)">
+            <summary>
+            获取一个自定义的数据库处理对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sqlSugarClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Blog.Core.Model.Seed.MyContext.GetCustomEntityDb``1(SqlSugar.ConnectionConfig)">
+            <summary>
+            获取一个自定义的数据库处理对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:Blog.Core.Model.TableModel`1">
             <summary>
